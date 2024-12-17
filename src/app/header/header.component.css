@@ -1,0 +1,24 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  max-width: 50rem;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(
+    to top,
+    #9c9c9c,
+    #d1d1d1
+  );
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+header img {
+  max-width: 8rem; /* You can adjust the size of the image */
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
