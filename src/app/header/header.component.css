@@ -6,17 +6,14 @@ header {
   max-width: 50rem;
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(
-    to top,
-    #9c9c9c,
-    #d1d1d1
-  );
+  background: linear-gradient(180deg, #253c3c, #1d4949);
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
 }
 
 header img {
   max-width: 8rem; /* You can adjust the size of the image */
+  filter: invert(85%) sepia(5%) saturate(500%) hue-rotate(190deg) brightness(90%);
 }
 
 header h1 {

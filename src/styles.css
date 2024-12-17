@@ -1,8 +1,12 @@
+* {
+  box-sizing: border-box;
+}
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #182b16;
+  background: linear-gradient(#d0d6d9, #b1b4ba);
+  color: #d0d6d9;
 }
 
 body {
@@ -10,7 +14,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  font-family: Arial, sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 main {
@@ -19,9 +23,11 @@ main {
   align-items: center;
   width: 100%;
   height: calc(100vh - 160px);
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 main div {
-  background: #9c9c9c;
+  background: linear-gradient(180deg, #253c3c, #1d4949);
+  width: 100%;
 }
