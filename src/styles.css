@@ -32,6 +32,10 @@ main div {
   width: 100%;
 }
 
+hr {
+  background: #d0d6d9;
+}
+
 .control-redirect p {
   display: flex;
   width: 100%;
