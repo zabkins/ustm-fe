@@ -4,7 +4,7 @@ import {AuthService} from "../auth.service";
 import {NgClass} from "@angular/common";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ErrorBody} from "./auth.models";
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router, RouterLink} from "@angular/router";
 import {filter} from "rxjs";
 
 @Component({
@@ -12,7 +12,8 @@ import {filter} from "rxjs";
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

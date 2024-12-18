@@ -31,3 +31,31 @@ main {
 main div {
   width: 100%;
 }
+
+.control-redirect p {
+  display: flex;
+  width: 100%;
+  font-size: 0.8rem;
+  justify-content: center;
+  padding: 0 0.5rem;
+}
+
+#redirect-information {
+  padding: 0 0.1rem;
+}
+
+#redirect-link {
+  padding: 0 0.1rem;
+  text-decoration: underline;
+}
+
+#redirect-link:hover, #redirect-link:visited {
+  color: #bec2c3;
+  cursor: pointer;
+}
+
+#redirect-link:active {
+  color: #bec2c3;
+  cursor: pointer;
+  transform: scale(0.95);
+}
