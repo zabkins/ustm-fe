@@ -1,1 +1,28 @@
-<p>login works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="control">
+    <h1>Enter your credentials</h1>
+  </div>
+  <div class="control">
+    <label for="emailInput">Email</label>
+    <input id="emailInput"
+           type="email"
+           name="emailInput"
+           formControlName="email"
+           [ngClass]="{'field-invalid': isFieldInvalid('email')}"/>
+  </div>
+  <div class="control">
+    <label for="passwordInput">Password</label>
+    <input id="passwordInput"
+           type="password"
+           name="passwordInput"
+           formControlName="password"
+           [ngClass]="{'field-invalid': isFieldInvalid('password')}"
+    />
+  </div>
+  @if (errorMessage()) {
+    <p class="control-error">{{ errorMessage() }}</p>
+  }
+  <div class="control">
+    <button>Login</button>
+  </div>
+</form>

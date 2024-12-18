@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 body, html {
   margin: 0;
   padding: 0;
@@ -28,6 +29,5 @@ main {
 }
 
 main div {
-  background: linear-gradient(180deg, #253c3c, #1d4949);
   width: 100%;
 }
