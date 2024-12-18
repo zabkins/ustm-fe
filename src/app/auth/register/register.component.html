@@ -1,0 +1,44 @@
+<form [formGroup]="form">
+  <div class="control">
+    <h1>Create an account</h1>
+  </div>
+  <div class="control">
+    <label for="firstNameInput">Firstname</label>
+    <input id="firstNameInput"
+           type="text"
+           name="firstNameInput"
+           formControlName="firstName"/>
+  </div>
+  <div class="control">
+    <label for="lastNameInput">Lastname</label>
+    <input id="lastNameInput"
+           type="text"
+           name="lastNameInput"
+           formControlName="lastName"/>
+  </div>
+  <div class="control">
+    <label for="emailInput">Email</label>
+    <input id="emailInput"
+           type="text"
+           name="emailInput"
+           formControlName="email"/>
+  </div>
+  <div class="control-row" formGroupName="passwords">
+    <div class="control">
+      <label for="passwordInput">Password</label>
+      <input id="passwordInput"
+             type="password"
+             name="passwordInput"
+             formControlName="password"
+      />
+    </div>
+    <div class="control">
+      <label for="repeatPasswordInput">Repeat password</label>
+      <input id="repeatPasswordInput"
+             type="password"
+             name="repeatPasswordInput"
+             formControlName="repeatPassword"
+      />
+    </div>
+  </div>
+</form>
