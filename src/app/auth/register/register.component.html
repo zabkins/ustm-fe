@@ -1,27 +1,31 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="control">
     <h1>Create an account</h1>
   </div>
+  <hr>
   <div class="control">
     <label for="firstNameInput">Firstname</label>
     <input id="firstNameInput"
            type="text"
            name="firstNameInput"
-           formControlName="firstName"/>
+           formControlName="firstName"
+           [ngClass]="{'field-invalid': isFieldInvalid('firstName')}"/>
   </div>
   <div class="control">
     <label for="lastNameInput">Lastname</label>
     <input id="lastNameInput"
            type="text"
            name="lastNameInput"
-           formControlName="lastName"/>
+           formControlName="lastName"
+           [ngClass]="{'field-invalid': isFieldInvalid('lastName')}"/>
   </div>
   <div class="control">
     <label for="emailInput">Email</label>
     <input id="emailInput"
            type="text"
            name="emailInput"
-           formControlName="email"/>
+           formControlName="email"
+           [ngClass]="{'field-invalid': isFieldInvalid('email')}"/>
   </div>
   <div class="control-row" formGroupName="passwords">
     <div class="control">
@@ -30,7 +34,10 @@
              type="password"
              name="passwordInput"
              formControlName="password"
-      />
+             [ngClass]="{'field-invalid': isFieldInvalid('password', 'passwords')}"/>
+    </div>
+    <div class="control-info">
+      <p>Minimum 6 characters long</p>
     </div>
     <div class="control">
       <label for="repeatPasswordInput">Repeat password</label>
@@ -38,7 +45,32 @@
              type="password"
              name="repeatPasswordInput"
              formControlName="repeatPassword"
-      />
+             [ngClass]="{'field-invalid': isFieldInvalid('repeatPassword', 'passwords')}"/>
+    </div>
+    <div class="form-errors">
+      @if (form.get('passwords')?.hasError('valuesNotEqual')) {
+        <div class="control-error">
+          <p>Passwords do not match</p>
+        </div>
+      }
+      @if (errorMessage()) {
+        <div class="control-error">
+          <p>Some fields are empty or invalid</p>
+        </div>
+      }
     </div>
   </div>
+  <hr id="form-end">
+  <div class="control-row">
+    <button type="submit">Register</button>
+    <button type="button" routerLink="/login">Abort</button>
+  </div>
+  @if (accountCreated) {
+    <div class="control-redirect">
+      <p>
+        <span id="redirect-information">Account created.</span>
+        <a id="redirect-link" routerLink="/">Use your credentials to login</a>
+      </p>
+    </div>
+  }
 </form>

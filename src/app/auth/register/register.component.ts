@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {NgClass} from "@angular/common";
+import {RouterLink} from "@angular/router";
 
 function valuesEqual(controlName1: string, controlName2: string){
   return (control: AbstractControl) => {
@@ -18,12 +20,17 @@ function valuesEqual(controlName1: string, controlName2: string){
   selector: 'app-register',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass,
+    RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  accountCreated = false;
+  errorMessage = signal<string | null>(null);
+
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -36,4 +43,23 @@ export class RegisterComponent {
     })
   });
 
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.errorMessage.set('Some fields are empty or invalid');
+      return;
+    }
+    this.accountCreated = true;
+    this.errorMessage.set(null);
+  }
+
+  isFieldInvalid(fieldName: string, groupName?: string) {
+    if (groupName) {
+      let field = this.form.get(groupName + '.' + fieldName)!;
+      return field.invalid && field.touched;
+    } else {
+      let field = this.form.get(fieldName)!;
+      return field.invalid && field.touched;
+    }
+  }
 }

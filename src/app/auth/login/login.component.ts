@@ -37,7 +37,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.form.invalid) {
-      this.errorMessage.set('Please provide valid email and password')
+      this.errorMessage.set('Email and password cannot be empty');
       this.form.markAllAsTouched();
       return;
     }
@@ -55,7 +55,7 @@ export class LoginComponent {
       error: (error: HttpErrorResponse) => {
         let errorBody: ErrorBody = error.error;
         console.log(errorBody);
-        this.errorMessage.set(errorBody.description);
+        this.errorMessage.set('Login unsuccessful. ' + errorBody.detail);
       }
     })
   }
