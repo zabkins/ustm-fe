@@ -8,6 +8,20 @@ export interface LoginResponse {
   expiresIn: number;
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  fullName: string;
+}
+
+export interface RegisterResponse {
+  id: number;
+  fullName: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ErrorBody {
   type: string;
   title: string;

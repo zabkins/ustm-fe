@@ -1,7 +1,10 @@
-import {Component, signal} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {NavigationEnd, Router, RouterLink} from "@angular/router";
+import {AuthService} from "../auth.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {filter} from "rxjs";
 
 function valuesEqual(controlName1: string, controlName2: string){
   return (control: AbstractControl) => {
@@ -30,6 +33,11 @@ function valuesEqual(controlName1: string, controlName2: string){
 export class RegisterComponent {
   accountCreated = false;
   errorMessage = signal<string | null>(null);
+  private authService = inject(AuthService);
+
+  constructor(private router: Router) {
+    this.setupRouteChangeListener();
+  }
 
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
@@ -49,8 +57,21 @@ export class RegisterComponent {
       this.errorMessage.set('Some fields are empty or invalid');
       return;
     }
-    this.accountCreated = true;
-    this.errorMessage.set(null);
+    this.authService.getRegisterRequest({
+      email: this.form.value.email!,
+      password: this.form.value.passwords!.password!,
+      fullName: this.form.value.firstName! + ' ' + this.form.value.lastName!
+    }).subscribe({
+      next: response => {
+        console.log(response);
+        this.errorMessage.set(null);
+        this.accountCreated = true;
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody = error.error;
+        this.errorMessage.set('Account not created. ' + errorBody.description);
+      }
+    })
   }
 
   isFieldInvalid(fieldName: string, groupName?: string) {
@@ -61,5 +82,13 @@ export class RegisterComponent {
       let field = this.form.get(fieldName)!;
       return field.invalid && field.touched;
     }
+  }
+
+  private setupRouteChangeListener() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.errorMessage.set(null);
+      })
   }
 }
