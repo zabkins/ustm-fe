@@ -30,3 +30,12 @@ export interface ErrorBody {
   instance: string;
   description: string;
 }
+
+export interface UserInformation {
+  name: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  expiration: string;
+  expired: boolean;
+}

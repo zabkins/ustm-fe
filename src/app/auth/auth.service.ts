@@ -1,6 +1,7 @@
 import {inject, Injectable, signal} from "@angular/core";
-import {LoginRequest, LoginResponse, RegisterRequest, RegisterResponse} from "./login/auth.models";
-import {HttpClient} from "@angular/common/http";
+import {LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, UserInformation} from "./login/auth.models";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {firstValueFrom} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,23 @@ export class AuthService {
     return this.httpClient.post<RegisterResponse>('http://localhost:8080/auth/signup', registerRequest);
   }
 
+  fetchUserInfo(){
+    return this.httpClient.get<UserInformation>('http://localhost:8080/users/me');
+  }
+
+  getRefreshTokenRequest() {
+    return firstValueFrom(this.httpClient.post<LoginResponse>('http://localhost:8080/auth/refresh', {
+      headers: {
+        'Authorization': `Bearer ${this.currentlySignedUserToken()}`
+      }
+    }));
+  }
+
   loginUser(response: LoginResponse) {
     this.currentlySignedUserToken.set(response.token);
+  }
+
+  logout() {
+    this.currentlySignedUserToken.set(null);
   }
 }

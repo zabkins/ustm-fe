@@ -8,8 +8,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    // canActivate: [AuthGuard],
-    //FIXME -> temporarily commented out for development
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
