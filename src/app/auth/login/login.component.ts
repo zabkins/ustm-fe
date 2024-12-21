@@ -46,7 +46,6 @@ export class LoginComponent {
       password: this.form.value.password!
     }).subscribe({
       next: response => {
-        console.log(response);
         this.authService.loginUser(response);
         this.router.navigate([''], {
           replaceUrl: true

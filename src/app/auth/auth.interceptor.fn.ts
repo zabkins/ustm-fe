@@ -14,6 +14,7 @@ export const authInterceptorFn: HttpInterceptorFn = (request, next) => {
       }
     });
   }
+  authService.latestRequestTimestamp.set(Date.now())
   return next(request);
 }
 
