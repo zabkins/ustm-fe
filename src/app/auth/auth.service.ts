@@ -47,7 +47,6 @@ export class AuthService {
 
   logout() {
     this.currentlySignedUserToken.set(null);
-    localStorage.removeItem('token');
     if (this.refreshSubscription()) {
       this.refreshSubscription()!.unsubscribe();
     }

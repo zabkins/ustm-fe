@@ -15,7 +15,6 @@
   max-width: 50rem;
   width: 50rem;
   text-align: center;
-  justify-content: center;
   align-content: center;
   background: linear-gradient(180deg, #253c3c, #1d4949);
 }
@@ -36,4 +35,125 @@
   height: 100%;
   margin: 0 0.2rem 0 0.2rem;
   background: linear-gradient(180deg, #253c3c, #1d4949);
+}
+
+.user-top-bar {
+  display: flex;
+  align-items: center;
+  color: black;
+  margin-top: 0.8rem;
+  height: 100%;
+  width: 100%;
+  max-height: 2rem;
+  background: #d0d6d9;
+}
+
+.user-information {
+  padding-left: 1rem;
+
+}
+
+#userLogo {
+  max-height: inherit;
+  height: 0.8rem;
+  width: 1rem;
+}
+
+.user-information span {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+
+.user-actions-dropdown {
+  position: relative;
+  display: inline-block;
+  justify-content: end;
+  margin-left: auto;
+  margin-right: 0.25rem;
+  width: auto;
+}
+
+.dropdown-toggle {
+  width: 1.5rem;
+  height: 2rem;
+}
+
+.dropdown-toggle img {
+  width: 100%;
+  height: 100%;
+}
+
+.dropdown-toggle img:hover {
+  transform: scale(0.95);
+}
+
+.dropdown-toggle img:active {
+  transform: scale(0.85);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #2e2e2e;
+  color: #d0d6d9;
+  border-radius: 0.5rem;
+  max-width: 10rem;
+  width:auto;
+  padding: 0.2rem;
+  margin: 0.1rem;
+  z-index: 1;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-content a {
+  display: block;
+  align-content: center;
+  white-space: nowrap;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover, .dropdown-content a:visited {
+  color: #d0d6d9;
+}
+
+.dropdown-content hr {
+  margin: 0;
+  height: 1px;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  color: #d0d6d9;
+}
+
+.dropdown-content a:active {
+  color: #d0d6d9;
+  transform: scale(0.95);
+}
+
+.dropdown-content a img {
+  padding-left: 0.5rem;
+  width: 1rem;
+  height: 0.8rem;
+  filter: invert(85%) sepia(5%) saturate(500%) hue-rotate(190deg) brightness(90%);
+}
+
+.show-dropdown {
+  display: block;
+}
+
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  color: black;
+  padding: 0.5rem;
+}
+
+.tasks-list div {
+  border: 2px solid black;
 }
