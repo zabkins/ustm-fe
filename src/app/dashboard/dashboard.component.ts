@@ -5,12 +5,14 @@ import {ErrorBody, UserInformation} from "../auth/login/auth.models";
 import {DashboardService} from "./dashboard.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import { Task } from '../tasks/tasks.models';
+import {TaskComponent} from "../tasks/task/task.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    TaskComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
