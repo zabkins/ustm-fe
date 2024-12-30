@@ -23,18 +23,23 @@
     <div class="task-control-row" id="task-last-row">
       <span class="property-title">Date of finish:</span>
       <span>31/01/2025 12:00:00 CEST</span>
-<!--      TODO -> czy to jak zamienie na SPAN to nie bedzie ladniej-->
-      <button class="subtasks-toggle-button" type="button" (click)="toggleSubtasks()">
+      <button
+        class="subtasks-toggle-button"
+        type="button"
+        (click)="toggleSubtasks()"
+        [ngClass]="{'not-rounded-bottom-right': subtasksVisible}"
+        [@round-button]="subtasksVisible ? 'unrounded' : 'rounded'">
         Subtasks
-        <img src="down-arrow.png" alt="An arrow pointing down"/>
+        <img
+          src="down-arrow.png"
+          alt="An arrow pointing down"
+          [ngClass]="{'rotate-image': subtasksVisible}"/>
       </button>
     </div>
-    @if (subtasksVisible) {
-      <div class="task-control-row">
-        <div class="subtasks-list">
-          SOME SUBTASKS HERE
-        </div>
+      <div id="subtasks" class="subtasks-list" [@rollout]="subtasksVisible ? 'visible' : 'hidden'">
+        <div>FIRST ROW HERE</div>
+        <div>SECOND ROW HERE</div>
+        <div>THIRD ROW HERE</div>
       </div>
-    }
   </div>
 </div>
