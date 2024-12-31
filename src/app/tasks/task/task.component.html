@@ -1,12 +1,11 @@
 <div class="task-control">
   <div class="task-control-header">
-          <span class="task-control-header-left">
-            Name of the task will be here
-          </span>
+          <span class="task-control-header-left">{{task.name}}</span>
     <span class="task-control-header-right">
             Status:
-            <span class="task-status" status="CANCELLED">
-              STATUS
+<!--      FIXME -> status binding-->
+            <span class="task-status" status="task.status">
+              {{ task.status }}
             </span>
           </span>
   </div>
@@ -14,15 +13,15 @@
   <div class="task-body">
     <div class="task-control-row">
       <span class="property-title">Description:</span>
-      <span>Task's description will be here. It should wrap around if there is too much content</span>
+      <span>{{task.description}}</span>
     </div>
     <div class="task-control-row">
       <span class="property-title">Date of start:</span>
-      <span>01/01/2025 12:00:00 CEST</span>
+      <span>{{task.startDate}}</span>
     </div>
     <div class="task-control-row" id="task-last-row">
       <span class="property-title">Date of finish:</span>
-      <span>31/01/2025 12:00:00 CEST</span>
+      <span>{{task.finishDate}}</span>
       <button
         class="subtasks-toggle-button"
         type="button"
@@ -36,10 +35,14 @@
           [ngClass]="{'rotate-image': subtasksVisible}"/>
       </button>
     </div>
-      <div id="subtasks" class="subtasks-list" [@rollout]="subtasksVisible ? 'visible' : 'hidden'">
-        <div>FIRST ROW HERE</div>
-        <div>SECOND ROW HERE</div>
-        <div>THIRD ROW HERE</div>
-      </div>
+    <div class="subtasks-list"
+         [@rollout]="subtasksVisible ? 'visible' : 'hidden'">
+      <app-subtask [subTask]="{
+      id: 1,
+      name: 'SubTask#1',
+      description: 'This is a temporary mock subtask',
+      done: true}"></app-subtask>
+      <div class="subtask-bottom-padding"></div>
+    </div>
   </div>
 </div>

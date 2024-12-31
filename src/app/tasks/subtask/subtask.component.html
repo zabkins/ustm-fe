@@ -1,0 +1,17 @@
+<div class="subtask-control">
+  <div class="subtask-body">
+    <div class="subtask-control-row">
+      <span class="subtask-control-name">{{ subTask.name }}</span>
+      @if (subTask.done) {
+        <span class="subtask-control-status">
+                Done
+              </span>
+      }
+    </div>
+    <div class="subtask-control-row">
+              <span class="subtask-control-description">
+                {{subTask.description}}
+              </span>
+    </div>
+  </div>
+</div>

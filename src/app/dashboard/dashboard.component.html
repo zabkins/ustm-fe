@@ -20,7 +20,15 @@
       </div>
     </div>
     <div class="tasks-list">
-      <app-task></app-task>
+      <app-task [task]="{
+        id: 1,
+        name: 'MockTask#1',
+        description: 'This is a temporary description for MockTask#1. It can be quite long',
+        startDate: '01/01/2025 12:00:00 CEST',
+        finishDate: '31/01/2025 12:00:00 CEST',
+        status: 'DONE',
+        subTasks: []
+      }"></app-task>
     </div>
   </div>
   <div class="vr"></div>

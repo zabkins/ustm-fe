@@ -1,0 +1,54 @@
+.subtask-control {
+  display: flex;
+  flex-direction: row;
+  width: 24rem;
+  align-items: center;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+}
+
+.subtask-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  padding: 0.2rem 0.4rem;
+  background: #d0d6d9;
+  border-radius: 0.75rem;
+}
+
+.subtask-control-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  text-wrap: wrap;
+  text-align: start;
+  font-size: 0.75rem;
+}
+
+.subtask-control-name {
+  font-weight: bolder;
+  margin-right: 0.2rem;
+}
+
+.subtask-control-status {
+  margin-left: 0.2rem;
+  color: #2e2e2e;
+  background: #00c115;
+  border: 1px solid #2e2e2e;
+  border-radius: 0.25rem;
+  padding: 0 0.2rem;
+  font-weight: normal;
+}
+
+.subtask-control-description {
+  align-items: baseline;
+  text-wrap: wrap;
+}
+
+.subtask-bottom-padding {
+  height: 0.1rem;
+  margin:0;
+  padding: 0;
+}

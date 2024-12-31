@@ -117,3 +117,15 @@
 .not-rounded-bottom-right {
   border-bottom-right-radius: 0;
 }
+
+.subtasks-list {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #9b9c9f;
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  overflow: hidden;
+}

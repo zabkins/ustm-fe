@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
-import {NgClass} from "@angular/common";
+import {Component, Input} from '@angular/core';
+import {NgClass, NgStyle} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {SubtaskComponent} from "../subtask/subtask.component";
+import {Task} from "../tasks.models";
 
 @Component({
   selector: 'app-task',
   standalone: true,
   imports: [
     NgClass,
-    FormsModule
+    FormsModule,
+    NgStyle,
+    SubtaskComponent
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css',
@@ -57,6 +61,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   ]
 })
 export class TaskComponent {
+  @Input({required: true}) task!: Task;
   subtasksVisible = false;
 
   toggleSubtasks() {
