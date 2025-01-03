@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   private authService = inject(AuthService);
   private dashboardService = inject(DashboardService);
   userInfo = signal<UserInformation | null>(null);
-  private userTasks = signal<Task[]>([]);
+  protected userTasks = signal<Task[]>([]);
   dropdownVisible = false;
 
   ngOnInit(): void {

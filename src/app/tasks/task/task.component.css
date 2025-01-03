@@ -6,6 +6,12 @@
   align-items: center;
   border: 1px black solid;
   border-radius: 0.75rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.task-control:hover {
+  box-shadow: 0 0 0.5rem 0 #d0d6d9;
 }
 
 .task-control-header {
@@ -30,22 +36,26 @@
 
 .task-status {
   text-transform: uppercase;
+  font-weight: normal;
+  padding: 0 0.2rem;
+  border-radius: 0.25rem;
+  border: 1px solid #2e2e2e;
 }
 
 .task-status[status='PLANNED'] {
-  color: #636363;
+  background-color: #c1c1c1;
 }
 
 .task-status[status='IN_PROGRESS'] {
-  color: #c1c1c1;
+  background-color: #73a177;
 }
 
 .task-status[status='DONE'] {
-  color: #00c115;
+  background-color: #208029;
 }
 
 .task-status[status='CANCELLED'] {
-  color: #700000;
+  background-color: #a84646;
 }
 
 .task-control hr {

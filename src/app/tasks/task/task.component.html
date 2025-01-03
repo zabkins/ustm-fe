@@ -2,7 +2,6 @@
   <div class="task-control-header">
           <span class="task-control-header-left">{{task.name}}</span>
     <span class="task-control-header-right">
-            Status:
             <span class="task-status"
             [attr.status]="task.status">
               {{ task.status }}
@@ -37,11 +36,9 @@
     </div>
     <div class="subtasks-list"
          [@rollout]="subtasksVisible ? 'visible' : 'hidden'">
-      <app-subtask [subTask]="{
-      id: 1,
-      name: 'SubTask#1',
-      description: 'This is a temporary mock subtask',
-      done: true}"></app-subtask>
+      @for (subTask of task.subTasks; track subTask.id) {
+        <app-subtask [subTask]="subTask"></app-subtask>
+      }
       <div class="subtask-bottom-padding"></div>
     </div>
   </div>
