@@ -3,8 +3,8 @@
           <span class="task-control-header-left">{{task.name}}</span>
     <span class="task-control-header-right">
             Status:
-<!--      FIXME -> status binding-->
-            <span class="task-status" status="task.status">
+            <span class="task-status"
+            [attr.status]="task.status">
               {{ task.status }}
             </span>
           </span>
