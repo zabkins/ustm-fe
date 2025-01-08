@@ -37,7 +37,7 @@
   background: linear-gradient(180deg, #253c3c, #1d4949);
 }
 
-.user-top-bar {
+.dashboard-top-bar {
   display: flex;
   align-items: center;
   color: black;
@@ -46,6 +46,16 @@
   width: 100%;
   max-height: 2rem;
   background: #d0d6d9;
+}
+
+.dashboard-top-bar#top-bar-left {
+  border-left: 0.15rem solid #1d4949;
+  border-right: 0.05rem solid #1d4949;
+}
+
+.dashboard-top-bar#top-bar-right {
+  border-right: 0.15rem solid #1d4949;
+  border-left: 0.05rem solid #1d4949;
 }
 
 .user-information {
@@ -153,4 +163,37 @@
   color: black;
   padding: 0.5rem;
   overflow: hidden;
+}
+
+.dashboard-add-task-button {
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  background: #1d4949;
+  border: 0.1rem solid #2e2e2e;
+  border-radius: 0.2rem;
+  color: #d0d6d9;
+  padding: 0.1rem 0.3rem 0.1rem 0.05rem;
+  margin-left: 0.4rem;
+}
+
+.dashboard-add-task-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0.25rem 0 #2e2e2e;
+}
+
+
+.dashboard-add-task-button:active {
+  transform: scale(0.95);
+}
+
+.dashboard-add-task-button span {
+  display: inline-block;
+  text-align: center;
+}
+
+.dashboard-add-task-button svg {
+  height: 1.2rem;
+  width: 1.2rem;
+  margin-right: 0.1rem;
 }
