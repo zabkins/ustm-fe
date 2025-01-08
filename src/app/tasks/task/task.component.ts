@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
@@ -62,9 +62,21 @@ import {Task} from "../tasks.models";
 })
 export class TaskComponent {
   @Input({required: true}) task!: Task;
+  @Input({required: true}) selectedTask!: Task | null;
+  @Output() taskSelectedForEdit = new EventEmitter<Task>();
   subtasksVisible = false;
+  isBeingEdited = false;
 
   toggleSubtasks() {
     this.subtasksVisible = !this.subtasksVisible;
+  }
+
+  toggleEdit() {
+    this.isBeingEdited = !this.isBeingEdited;
+    this.taskSelectedForEdit.emit(this.task);
+  }
+
+  isEditButtonEnabled() {
+    return this.selectedTask === null || this.selectedTask!.id === this.task.id;
   }
 }

@@ -19,6 +19,8 @@ export class AuthService {
   currentlySignedUserToken = signal<string | null>(null);
   refreshSubscription = signal<Subscription | null>(null);
   latestRequestTimestamp = signal<number | null>(null);
+  private userInfo = signal<UserInformation | null>(null);
+  user = this.userInfo.asReadonly();
 
   constructor(private destroyRef: DestroyRef) {
     this.destroyRef.onDestroy(() => {
@@ -37,7 +39,15 @@ export class AuthService {
   }
 
   fetchUserInfo(){
-    return this.httpClient.get<UserInformation>('http://localhost:8080/users/me');
+    return this.httpClient.get<UserInformation>('http://localhost:8080/users/me').subscribe({
+      next: response => {
+        this.userInfo.set(response);
+        console.log(response);
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
 
   loginUser(response: LoginResponse) {

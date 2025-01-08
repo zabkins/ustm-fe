@@ -1,0 +1,15 @@
+
+@if (task()) {
+  <div class="edit-area-control">
+    <div class="edit-task-control">
+      Here will be editing task area
+    </div>
+    <div class="edit-subtasks-control">
+      Here will be editing subtasks area
+    </div>
+  </div>
+} @else {
+  <div class="edit-area-fallback">
+    Select a task to edit
+  </div>
+}

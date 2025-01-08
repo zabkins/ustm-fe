@@ -21,12 +21,15 @@
     </div>
     <div class="tasks-list">
       @for (task of userTasks(); track task.id) {
-        <app-task [task]="task"></app-task>
+        <app-task
+          [task]="task"
+          (taskSelectedForEdit)="onTaskSelected($event)"
+          [selectedTask]="tasksService.taskInEdit()"></app-task>
       }
     </div>
   </div>
   <div class="vr"></div>
   <div class="dashboard-area dashboard-area-right">
-    right box
+    <app-edit-task-area></app-edit-task-area>
   </div>
 </div>

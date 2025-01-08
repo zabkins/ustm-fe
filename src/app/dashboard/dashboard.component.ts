@@ -1,18 +1,18 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../auth/auth.service";
-import {ErrorBody, UserInformation} from "../auth/login/auth.models";
-import {DashboardService} from "./dashboard.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import { Task } from '../tasks/tasks.models';
+import {TasksService} from "./tasks.service";
 import {TaskComponent} from "../tasks/task/task.component";
+import {ActionAreaComponent} from "../tasks/edit-task-area/action-area.component";
+import {Task} from "../tasks/tasks.models";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     RouterLink,
-    TaskComponent
+    TaskComponent,
+    ActionAreaComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -20,31 +20,29 @@ import {TaskComponent} from "../tasks/task/task.component";
 export class DashboardComponent implements OnInit {
   private router = inject(Router);
   private authService = inject(AuthService);
-  private dashboardService = inject(DashboardService);
-  userInfo = signal<UserInformation | null>(null);
-  protected userTasks = signal<Task[]>([]);
+  protected tasksService = inject(TasksService);
+
+  private selectedFilter = signal<string>('all');
   dropdownVisible = false;
+  userInfo = this.authService.user;
+  userTasks = computed(() => {
+    switch (this.selectedFilter()) {
+      case 'PLANNED':
+        return this.tasksService.tasks().filter(task => task.status === 'PLANNED');
+      case 'DONE':
+        return this.tasksService.tasks().filter(task => task.status === 'DONE');
+      case 'IN_PROGRESS':
+        return this.tasksService.tasks().filter(task => task.status === 'IN_PROGRESS');
+      case 'CANCELLED':
+        return this.tasksService.tasks().filter(task => task.status === 'CANCELLED');
+      default:
+        return this.tasksService.tasks();
+    }
+  })
 
   ngOnInit(): void {
-    this.authService.fetchUserInfo().subscribe({
-      next: response => {
-        this.userInfo.set(response);
-        console.log(response);
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
-    this.dashboardService.fetchUserTasks().subscribe({
-      next: response => {
-        this.userTasks.set(response.content);
-        console.log(response);
-      },
-      error: (error: HttpErrorResponse) => {
-        let errorBody: ErrorBody = error.error;
-        console.log(errorBody);
-      }
-    });
+    this.authService.fetchUserInfo();
+    this.tasksService.fetchUserTasks();
   }
 
   logout() {
@@ -56,5 +54,9 @@ export class DashboardComponent implements OnInit {
 
   toggleDropdown() {
     this.dropdownVisible = !this.dropdownVisible;
+  }
+
+  onTaskSelected(task: Task) {
+    this.tasksService.toggleTaskForEdit(task);
   }
 }
