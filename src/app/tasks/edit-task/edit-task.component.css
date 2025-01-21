@@ -1,0 +1,24 @@
+.edit-task-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  border: 1px solid black;
+  margin: 0;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.edit-task-control-row {
+  display: flex;
+  text-wrap: wrap;
+  width: 100%;
+  align-items: baseline;
+  justify-content: start;
+  text-align: start;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  font-size: 0.75rem;
+}

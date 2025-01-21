@@ -3,7 +3,7 @@ import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../auth/auth.service";
 import {TasksService} from "./tasks.service";
 import {TaskComponent} from "../tasks/task/task.component";
-import {ActionAreaComponent} from "../tasks/edit-task-area/action-area.component";
+import {ActionAreaComponent} from "../tasks/action-area/action-area.component";
 import {Task} from "../tasks/tasks.models";
 
 @Component({

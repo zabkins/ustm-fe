@@ -1,0 +1,9 @@
+ @if (task()) {
+    <div class="action-area-control">
+      <app-edit-task [task]="task()!"></app-edit-task>
+    </div>
+  } @else {
+    <div class="action-area-fallback">
+      No task selected. Choose one for editing or add a new one!
+    </div>
+  }

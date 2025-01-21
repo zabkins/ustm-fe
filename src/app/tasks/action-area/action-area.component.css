@@ -1,0 +1,22 @@
+* {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.action-area-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem;
+}
+
+.action-area-fallback {
+  display: inline-block;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1rem;
+  margin-top: 2rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
