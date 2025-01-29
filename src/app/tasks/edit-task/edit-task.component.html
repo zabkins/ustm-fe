@@ -1,25 +1,66 @@
 <div class="edit-task-control">
-  <div class="edit-task-control-row">
-    <div class="edit-task-control-label">Name</div>
-    <div class="edit-task-control-input">{{task.name}}</div>
-  </div>
-  <div class="edit-task-control-row">
-    <div class="edit-task-control-label">Description</div>
-    <div class="edit-task-control-input">{{task.description}}</div>
-  </div>
-  <div class="edit-task-control-row">
-    <div class="edit-task-control-label">Start Date</div>
-    <div class="edit-task-control-input">{{task.startDate}}</div>
-  </div>
-  <div class="edit-task-control-row">
-    <div class="edit-task-control-label">Finish Date</div>
-    <div class="edit-task-control-input">{{task.finishDate}}</div>
-  </div>
-  <div class="edit-task-control-row">
-    <div class="edit-task-control-label">Status</div>
-    <div class="edit-task-control-input">{{task.status}}</div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="edit-task-control-header">
+      <div class="header-label">Edit Task</div>
+      <div class="header-button-group">
+        <button id="submitButton" type="submit">Save</button>
+        <button id="discardButton" type="button">Discard</button>
+      </div>
+    </div>
+    <div class="edit-task-control-row-vertical">
+      <div class="edit-task-control-label">Name</div>
+      <input
+        class="edit-task-control-input"
+        id="nameInput"
+        type="text"
+        name="nameInput"
+        formControlName="name"
+      />
+    </div>
+    <div class="edit-task-control-row-vertical">
+      <div class="edit-task-control-label">Description</div>
+      <textarea
+        class="edit-task-control-textarea"
+        id="descriptionInput"
+        type="text"
+        name="descriptionInput"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="edit-task-control-row-horizontal">
+      <div class="edit-task-control-label">Start Date</div>
+      <input
+        class="edit-task-control-input"
+        id="startDateInput"
+        type="datetime-local"
+        name="startDateInput"
+        formControlName="startDate"
+      />
+    </div>
+    <div class="edit-task-control-row-horizontal">
+      <div class="edit-task-control-label">Finish Date</div>
+      <input
+        class="edit-task-control-input"
+        id="finishDateInput"
+        type="datetime-local"
+        name="finishDateInput"
+        formControlName="finishDate"
+      />
+    </div>
+    <div class="edit-task-control-row-horizontal">
+      <div class="edit-task-control-label">Status</div>
+      <select class="edit-task-control-input" id="statusInput" name="statusInput" formControlName="status">
+        <option value="IN_PROGRESS">IN PROGRESS</option>
+        <option value="DONE">DONE</option>
+        <option value="CANCELLED">CANCELLED</option>
+        <option value="PLANNED">PLANNED</option>
+      </select>
+    </div>
+  </form>
+  <div class="edit-task-control-subtasks">
+    @for (subtask of task.subTasks; track subtask.id) {
+      <app-edit-subtask [subTask]="subtask"></app-edit-subtask>
+    }
   </div>
 </div>
-<div class="edit-subtasks-control">
-  Here will be editing subtasks area
-</div>
+

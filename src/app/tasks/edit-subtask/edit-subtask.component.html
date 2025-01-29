@@ -1,0 +1,35 @@
+<div class="edit-subtask-control">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="edit-subtask-control-row-horizontal">
+      <div class="edit-subtask-control-row-vertical" id="nameRow">
+        <div class="edit-subtask-control-label">Name</div>
+        <input
+          class="edit-subtask-control-input"
+          id="subtaskNameInput"
+          type="text"
+          name="subtaskNameInput"
+          formControlName="name"
+          [ngClass]="{'input-disabled': isSubtaskDone()}"
+        />
+      </div>
+      <div id="actionArea">
+        @if (isSubtaskDone()) {
+          <span id="doneLabel">Done</span>
+        } @else {
+          <button type="button" id="completeButton">Complete</button>
+        }
+      </div>
+    </div>
+    <div class="edit-subtask-control-row-vertical" id="descriptionRow">
+      <div class="edit-subtask-control-label">Description</div>
+      <input
+        class="edit-subtask-control-input"
+        id="subtaskDescriptionInput"
+        type="text"
+        name="subtaskDescriptionInput"
+        formControlName="description"
+        [ngClass]="{'input-disabled': isSubtaskDone()}"
+      />
+    </div>
+  </form>
+</div>
