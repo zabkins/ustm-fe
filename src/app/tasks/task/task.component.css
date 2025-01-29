@@ -153,7 +153,7 @@
 }
 
 .task-edit-button-img {
-  background: #d57a00;
+  background: #d0d6d9;
   position: absolute;
   cursor: pointer;
   width: 1.1rem;
@@ -161,6 +161,7 @@
   padding: 0.1rem;
   top: 2.5rem;
   right: -0.55rem;
+  border: 0.1rem solid #2e2e2e;
   border-radius: 25%;
   object-fit: cover;
   object-position: center center;
