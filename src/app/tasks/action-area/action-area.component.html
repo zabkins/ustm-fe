@@ -1,9 +1,13 @@
- @if (task()) {
-    <div class="action-area-control">
-      <app-edit-task [task]="task()!"></app-edit-task>
-    </div>
-  } @else {
-    <div class="action-area-fallback">
-      No task selected. Choose one for editing or add a new one!
-    </div>
-  }
+@if (taskInEdit()) {
+  <div class="action-area-control">
+    <app-edit-task [task]="taskInEdit()!"></app-edit-task>
+  </div>
+} @else if (taskInAddition()) {
+  <div class="action-area-control">
+    <app-new-task></app-new-task>
+  </div>
+} @else {
+  <div class="action-area-fallback">
+    No task selected. Choose one for editing or add a new one!
+  </div>
+}

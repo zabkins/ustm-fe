@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {SubtaskComponent} from "../subtask/subtask.component";
 import {Task} from "../tasks.models";
+import {TasksService} from "../../dashboard/tasks.service";
 
 @Component({
   selector: 'app-task',
@@ -64,6 +65,7 @@ export class TaskComponent {
   @Input({required: true}) task!: Task;
   @Input({required: true}) selectedTask!: Task | null;
   @Output() taskSelectedForEdit = new EventEmitter<Task>();
+  tasksService = inject(TasksService);
   subtasksVisible = false;
   isBeingEdited = false;
 
@@ -77,6 +79,6 @@ export class TaskComponent {
   }
 
   isEditButtonEnabled() {
-    return this.selectedTask === null || this.selectedTask!.id === this.task.id;
+    return (this.selectedTask === null || this.selectedTask!.id === this.task.id) && !this.tasksService.taskInAddition();
   }
 }

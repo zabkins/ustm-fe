@@ -1,12 +1,13 @@
 import {inject, Injectable, signal} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Page, Task} from "../tasks/tasks.models";
+import {NewTask, Page, Task} from "../tasks/tasks.models";
 import {ErrorBody} from "../auth/login/auth.models";
 
 @Injectable({providedIn: 'root'})
 export class TasksService {
   tasks = signal<Task[]>([]);
   taskInEdit = signal<Task | null>(null);
+  taskInAddition = signal<boolean>(false);
   private httpClient = inject(HttpClient);
 
 
@@ -27,7 +28,13 @@ export class TasksService {
     if(this.taskInEdit() && this.taskInEdit()?.id === task.id) {
       this.taskInEdit.set(null);
     } else {
+      this.taskInAddition.set(false);
       this.taskInEdit.set(task);
     }
+  }
+
+  enableAddingNewTask() {
+    this.taskInEdit.set(null);
+    this.taskInAddition.set(true);
   }
 }

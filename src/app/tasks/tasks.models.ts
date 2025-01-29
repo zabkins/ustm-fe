@@ -24,3 +24,10 @@ export interface SubTask {
   description: string;
   done: boolean;
 }
+
+export interface NewTask {
+  name: string;
+  description: string;
+  startDate: string;
+  finishDate: string;
+}

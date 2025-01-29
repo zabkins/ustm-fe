@@ -59,4 +59,8 @@ export class DashboardComponent implements OnInit {
   onTaskSelected(task: Task) {
     this.tasksService.toggleTaskForEdit(task);
   }
+
+  onNewTaskAdd() {
+    this.tasksService.enableAddingNewTask();
+  }
 }
