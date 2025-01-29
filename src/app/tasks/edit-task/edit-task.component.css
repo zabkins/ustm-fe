@@ -34,24 +34,6 @@
   margin-right: 0;
 }
 
-.header-button-group button{
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin-right: 0.1rem;
-  margin-left: 0.1rem;
-  border-radius: 0.25rem;
-  padding: 0.25rem;
-}
-
-#submitButton {
-  background: #73a177;
-}
-
-#discardButton {
-  background: #a84646;
-}
-
 .edit-task-control form {
   display: flex;
   flex-direction: column;
@@ -111,6 +93,21 @@
   width: 100%;
 }
 
+input:focus {
+  outline: none;
+  background: #d0d6d9;
+}
+
+textarea:focus {
+  outline: none;
+  background: #d0d6d9;
+}
+
+select:focus {
+  outline: none;
+  background: #d0d6d9;
+}
+
 .edit-task-control-textarea {
   padding: 0.1rem;
   max-width: 100%;
@@ -121,10 +118,6 @@
   overflow: hidden;
   background: rgba(208, 214, 217, 0.75);
   border-radius: 0.25rem;
-}
-
-.edit-task-control-input:focus {
-  background: #d0d6d9;
 }
 
 .edit-task-control-subtasks {
@@ -138,4 +131,48 @@
   background: linear-gradient(180deg, #253c3c, #1d4949);
   justify-content: center;
   align-items: center;
+}
+
+.action-button {
+  display: flex;
+  text-align: center;
+  border-radius: 0.4rem;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025rem;
+  background: rgba(208, 214, 217, 0.75);
+  border: 0.1rem solid rgb(118, 118, 118);
+}
+
+button#submitButton, button#discardButton {
+  color: #d0d6d9;
+  background: linear-gradient(180deg, #253c3c, #1d4949);
+  margin-right: 0.1rem;
+  margin-left: 0.1rem;
+  border: 0.15rem solid #d0d6d9;
+}
+
+button#discardButton svg {
+  height: 0.95rem;
+  width: 0.95rem;
+  transform: rotate(45deg);
+}
+
+
+.action-button:hover {
+  cursor: pointer;
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+
+button#addSubtaskBtn {
+  margin-left: auto;
+}
+
+button#addSubtaskBtn svg{
+  height: 1rem;
+  width: 1rem;
 }
