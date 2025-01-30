@@ -1,6 +1,6 @@
 import {inject, Injectable, signal} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {NewTask, Page, Task} from "../tasks/tasks.models";
+import {Page, Task} from "../tasks/tasks.models";
 import {ErrorBody} from "../auth/login/auth.models";
 
 @Injectable({providedIn: 'root'})

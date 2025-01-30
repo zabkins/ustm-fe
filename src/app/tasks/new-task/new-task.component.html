@@ -1,1 +1,56 @@
-todo
+<div class="new-task-control">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="new-task-control-header">
+      <div class="header-label">Enter details</div>
+      <div class="header-button-group">
+        <button class="action-button" id="submitButton" type="submit">Create</button>
+        <button class="action-button" id="discardButton" type="button">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="new-task-control-row-vertical">
+      <div class="new-task-control-label">Name</div>
+      <input
+        class="new-task-control-input"
+        id="nameInput"
+        type="text"
+        name="nameInput"
+        formControlName="name"
+      />
+    </div>
+    <div class="new-task-control-row-vertical">
+      <div class="new-task-control-label">Description</div>
+      <textarea
+        class="new-task-control-textarea"
+        id="descriptionInput"
+        type="text"
+        name="descriptionInput"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="new-task-control-row-horizontal">
+      <div class="new-task-control-label">Start Date</div>
+      <input
+        class="new-task-control-input"
+        id="startDateInput"
+        type="datetime-local"
+        name="startDateInput"
+        formControlName="startDate"
+      />
+    </div>
+    <div class="new-task-control-row-horizontal">
+      <div class="new-task-control-label">Finish Date</div>
+      <input
+        class="new-task-control-input"
+        id="finishDateInput"
+        type="datetime-local"
+        name="finishDateInput"
+        formControlName="finishDate"
+      />
+    </div>
+  </form>
+</div>
+
