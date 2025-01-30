@@ -20,7 +20,7 @@ export class DatesService {
     // Format for datetime-local
   }
 
-  getCurrentDateInDatetimeLocalFormat(): {
+  getInitialFormStartAndFinishDatetime(): {
     startDate: string;
     endDate: string;
   } {
@@ -30,5 +30,9 @@ export class DatesService {
       startDate: now.toFormat('yyyy-MM-dd\'T\'HH:mm'),
       endDate: anHourFromNow.toFormat('yyyy-MM-dd\'T\'HH:mm'),
     };
+  }
+
+  getApiFormattedDate(date: string){
+    return DateTime.fromISO(date).toFormat('dd/MM/yyyy HH:mm:ss');
   }
 }
