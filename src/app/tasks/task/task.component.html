@@ -13,8 +13,10 @@
   <hr>
   <div class="task-body">
     <div class="task-control-row">
-      <span class="property-title">Description:</span>
-      <span>{{ task.description }}</span>
+      <span>
+        <span class="property-title">Description:</span>
+        {{ task.description }}
+      </span>
     </div>
     <div class="task-control-row">
       <span class="property-title">Date of start:</span>
@@ -23,18 +25,20 @@
     <div class="task-control-row" id="task-last-row">
       <span class="property-title">Date of finish:</span>
       <span>{{ task.finishDate }}</span>
-      <button id="subtasks-button"
-              class="subtasks-toggle-button"
-              type="button"
-              (click)="toggleSubtasks()"
-              [ngClass]="{'not-rounded-bottom-right': subtasksVisible}"
-              [@round-button]="subtasksVisible ? 'unrounded' : 'rounded'">
-        Subtasks
-        <img
-          src="down-arrow.png"
-          alt="An arrow pointing down"
-          [ngClass]="{'rotate-image': subtasksVisible}"/>
-      </button>
+      @if(task.subTasks.length >= 1) {
+        <button id="subtasks-button"
+                class="subtasks-toggle-button"
+                type="button"
+                (click)="toggleSubtasks()"
+                [ngClass]="{'not-rounded-bottom-right': subtasksVisible}"
+                [@round-button]="subtasksVisible ? 'unrounded' : 'rounded'">
+          Subtasks
+          <img
+            src="down-arrow.png"
+            alt="An arrow pointing down"
+            [ngClass]="{'rotate-image': subtasksVisible}"/>
+        </button>
+      }
     </div>
     <div class="subtasks-list"
          [@rollout]="subtasksVisible ? 'visible' : 'hidden'">
