@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {EditSubtaskComponent} from "../edit-subtask/edit-subtask.component";
 import {DatesService} from "../dates.service";
+import {TasksService} from "../../dashboard/tasks.service";
 
 @Component({
   selector: 'app-new-task',
@@ -15,6 +16,7 @@ import {DatesService} from "../dates.service";
 })
 export class NewTaskComponent {
   datesService = inject(DatesService);
+  tasksService = inject(TasksService);
 
   form = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -29,5 +31,9 @@ export class NewTaskComponent {
 
   onSubmit() {
     console.log(this.form);
+  }
+
+  onDiscard() {
+    this.tasksService.discardTaskForm();
   }
 }

@@ -1,14 +1,17 @@
-import {inject, Injectable, signal} from "@angular/core";
+import {EventEmitter, inject, Injectable, Output, signal} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Page, Task} from "../tasks/tasks.models";
 import {ErrorBody} from "../auth/login/auth.models";
+import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class TasksService {
   tasks = signal<Task[]>([]);
   taskInEdit = signal<Task | null>(null);
   taskInAddition = signal<boolean>(false);
+  @Output() taskFormDiscarded = new EventEmitter();
   private httpClient = inject(HttpClient);
+  private router = inject(Router);
 
 
   fetchUserTasks() {
@@ -35,6 +38,18 @@ export class TasksService {
 
   enableAddingNewTask() {
     this.taskInEdit.set(null);
+    this.taskFormDiscarded.emit();
     this.taskInAddition.set(true);
+  }
+
+  discardTaskForm() {
+    if(this.taskInEdit()) {
+      this.taskInEdit.set(null);
+    }
+    if (this.taskInAddition()) {
+      this.taskInAddition.set(false);
+    }
+    this.taskFormDiscarded.emit();
+    this.router.navigate(['/'], {replaceUrl: true});
   }
 }

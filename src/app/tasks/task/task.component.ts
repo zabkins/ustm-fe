@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output, Renderer2} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
@@ -61,7 +61,7 @@ import {TasksService} from "../../dashboard/tasks.service";
     ])
   ]
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   @Input({required: true}) task!: Task;
   @Input({required: true}) selectedTask!: Task | null;
   @Output() taskSelectedForEdit = new EventEmitter<Task>();
@@ -69,9 +69,16 @@ export class TaskComponent {
   subtasksVisible = false;
   isBeingEdited = false;
 
+  ngOnInit(): void {
+    this.tasksService.taskFormDiscarded.subscribe(() => {
+      this.isBeingEdited = false;
+    })
+  }
+
   toggleSubtasks() {
     this.subtasksVisible = !this.subtasksVisible;
   }
+
 
   toggleEdit() {
     this.isBeingEdited = !this.isBeingEdited;
@@ -79,6 +86,7 @@ export class TaskComponent {
   }
 
   isEditButtonEnabled() {
-    return (this.selectedTask === null || this.selectedTask!.id === this.task.id) && !this.tasksService.taskInAddition();
+    return ((this.selectedTask === null || this.selectedTask!.id === this.task.id))
+      && !this.tasksService.taskInAddition();
   }
 }

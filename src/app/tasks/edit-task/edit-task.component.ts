@@ -3,6 +3,7 @@ import {Task} from "../tasks.models";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {EditSubtaskComponent} from "../edit-subtask/edit-subtask.component";
 import {DatesService} from "../dates.service";
+import {TasksService} from "../../dashboard/tasks.service";
 
 @Component({
   selector: 'app-edit-task',
@@ -17,6 +18,7 @@ import {DatesService} from "../dates.service";
 export class EditTaskComponent implements OnInit{
   @Input({required: true}) task!: Task;
   datesService = inject(DatesService);
+  tasksService = inject(TasksService);
 
   form = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -39,5 +41,9 @@ export class EditTaskComponent implements OnInit{
   }
 
   onSubmit() {
+  }
+
+  onDiscard() {
+    this.tasksService.discardTaskForm();
   }
 }
