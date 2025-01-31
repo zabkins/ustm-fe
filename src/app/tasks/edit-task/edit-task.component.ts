@@ -57,6 +57,6 @@ export class EditTaskComponent implements OnInit{
 
   onSubtaskAdd() {
     this.subTaskBeingAdded = true;
-    // TODO
+    this.tasksService.addSubtask(this.task.id);
   }
 }

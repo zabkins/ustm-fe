@@ -69,7 +69,7 @@
       </button>
     </div>
   </form>
-  @if (task.subTasks.length >= 1) {
+  @if (task.subTasks.length >= 1 || subTaskBeingAdded) {
     <div class="edit-task-control-subtasks">
       @for (subtask of task.subTasks; track subtask.id) {
         <app-edit-subtask [subTask]="subtask"></app-edit-subtask>

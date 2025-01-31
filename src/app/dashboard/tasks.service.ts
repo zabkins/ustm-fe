@@ -1,6 +1,6 @@
 import {EventEmitter, inject, Injectable, Output, signal} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {NewTask, Page, Task} from "../tasks/tasks.models";
+import {NewTask, Page, SubTask, Task} from "../tasks/tasks.models";
 import {ErrorBody} from "../auth/login/auth.models";
 import {Router} from "@angular/router";
 
@@ -89,5 +89,24 @@ export class TasksService {
         console.log(errorBody);
       }
     })
+  }
+
+  addSubtask(taskId: number) {
+    this.httpClient.post<SubTask>(`http://localhost:8080/tasks/${taskId}/subtasks`, {
+      name: "",
+      description: "",
+    }).subscribe({
+      next: response => {
+        this.taskInEdit.set({
+          ...this.taskInEdit()!,
+          subTasks: [response, ...this.taskInEdit()!.subTasks]
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody: ErrorBody = error.error;
+        console.log(errorBody);
+      }
+    });
+    this.router.navigate(['/'], {replaceUrl: true});
   }
 }
