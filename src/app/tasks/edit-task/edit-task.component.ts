@@ -17,6 +17,7 @@ import {TasksService} from "../../dashboard/tasks.service";
 })
 export class EditTaskComponent implements OnInit{
   @Input({required: true}) task!: Task;
+  subTaskBeingAdded = false;
   datesService = inject(DatesService);
   tasksService = inject(TasksService);
 
@@ -41,9 +42,21 @@ export class EditTaskComponent implements OnInit{
   }
 
   onSubmit() {
+    this.tasksService.updateTask(this.task.id, {
+      name: this.form.value.name!,
+      description: this.form.value.description!,
+      startDate: this.datesService.getApiFormattedDate(this.form.value.startDate!),
+      finishDate: this.datesService.getApiFormattedDate(this.form.value.finishDate!),
+      status: this.task.status!,
+    });
   }
 
   onDiscard() {
     this.tasksService.discardTaskForm();
+  }
+
+  onSubtaskAdd() {
+    this.subTaskBeingAdded = true;
+    // TODO
   }
 }

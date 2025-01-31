@@ -44,7 +44,7 @@ export class TasksService {
   }
 
   toggleTaskForEdit(task: Task) {
-    if(this.taskInEdit() && this.taskInEdit()?.id === task.id) {
+    if (this.taskInEdit() && this.taskInEdit()?.id === task.id) {
       this.taskInEdit.set(null);
     } else {
       this.taskInAddition.set(false);
@@ -59,7 +59,7 @@ export class TasksService {
   }
 
   discardTaskForm() {
-    if(this.taskInEdit()) {
+    if (this.taskInEdit()) {
       this.taskInEdit.set(null);
     }
     if (this.taskInAddition()) {
@@ -67,5 +67,27 @@ export class TasksService {
     }
     this.taskFormDiscarded.emit();
     this.router.navigate(['/'], {replaceUrl: true});
+  }
+
+  updateTask(
+    taskId: number,
+    taskProperties: {
+      name: string;
+      description: string;
+      finishDate: string | "Invalid DateTime";
+      startDate: string | "Invalid DateTime";
+      status: "PLANNED" | "IN_PROGRESS" | "DONE" | "CANCELLED"
+    }) {
+    this.httpClient.put<Task>(`http://localhost:8080/tasks/${taskId}`, taskProperties).subscribe({
+      next: response => {
+        this.taskInEdit.set(response);
+        this.tasks.set(this.tasks().map(task => task.id === response.id ? response : task));
+        this.router.navigate(['/'], {replaceUrl: true});
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody: ErrorBody = error.error;
+        console.log(errorBody);
+      }
+    })
   }
 }

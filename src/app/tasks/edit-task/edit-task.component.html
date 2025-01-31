@@ -5,7 +5,8 @@
       <div class="header-button-group">
         <button class="action-button" id="submitButton" type="submit">Save</button>
         <button class="action-button" id="discardButton" type="button" (click)="onDiscard()">
-          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%"
+               height="100%" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
           </svg>
         </button>
@@ -59,18 +60,21 @@
         <option value="CANCELLED">CANCELLED</option>
         <option value="PLANNED">PLANNED</option>
       </select>
-      <button class="action-button" type="button" id="addSubtaskBtn">
+      <button class="action-button" type="button" id="addSubtaskBtn" (click)="onSubtaskAdd()">
         Subtask
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+             fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
         </svg>
       </button>
     </div>
   </form>
-  <div class="edit-task-control-subtasks">
-    @for (subtask of task.subTasks; track subtask.id) {
-      <app-edit-subtask [subTask]="subtask"></app-edit-subtask>
-    }
-  </div>
+  @if (task.subTasks.length >= 1) {
+    <div class="edit-task-control-subtasks">
+      @for (subtask of task.subTasks; track subtask.id) {
+        <app-edit-subtask [subTask]="subtask"></app-edit-subtask>
+      }
+    </div>
+  }
 </div>
 
