@@ -121,9 +121,11 @@ input:focus {
   margin-right: 0.2rem;
 }
 
-button#completeButton {
+button#completeButton, button#deleteButton {
   position: relative;
   padding: 0;
+  margin-left: 0.05rem;
+  margin-right: 0.05rem;
   border: 0.1rem solid #d0d6d9;
 }
 
@@ -135,6 +137,14 @@ button#completeButton svg{
   background: #208029;
 }
 
+button#deleteButton svg {
+  padding: 0.2rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.25rem;
+  background: #802020;
+}
+
 .tooltip-text {
   display: inline-flex;
   visibility: hidden;
@@ -144,6 +154,7 @@ button#completeButton svg{
   bottom: 95%;
   left: 95%;
   opacity: 0;
+  z-index: 999;
   transition: opacity 0.3s;
   background: #d0d6d9;
   border: 0.15rem solid #2e2e2e;
@@ -152,12 +163,18 @@ button#completeButton svg{
   padding: 0.2rem;
 }
 
-button#completeButton:hover .tooltip-text {
+button#completeButton:hover .tooltip-text,
+button#deleteButton:hover .tooltip-text{
   visibility: visible;
   opacity: 1;
 }
 
-button#completeButton:active .tooltip-text {
+button#completeButton:active .tooltip-text,
+button#deleteButton:active .tooltip-text{
   visibility: hidden;
   opacity: 0;
+}
+
+.field-invalid {
+  border: 0.1rem solid #5a0011;
 }

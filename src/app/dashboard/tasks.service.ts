@@ -109,4 +109,91 @@ export class TasksService {
     });
     this.router.navigate(['/'], {replaceUrl: true});
   }
+
+  updateSubtask(subtaskId: number, details: {name: string; description: string}) {
+    this.httpClient.put<SubTask>(`http://localhost:8080/tasks/subtasks/${subtaskId}`, {
+      name: details.name,
+      description: details.description,
+      done: false
+    }).subscribe({
+      next: response => {
+        this.taskInEdit.set({
+          ...this.taskInEdit()!,
+          subTasks: this.taskInEdit()!.subTasks.map(subtask => subtask.id === response.id ? response : subtask)
+        });
+
+        this.tasks.set(this.tasks().map(task =>
+          task.id === this.taskInEdit()!.id
+            ? {
+              ...task,
+              subTasks: task.subTasks.map(subtask =>
+                subtask.id === response.id ? response : subtask
+              )
+            }
+            : task
+        ));
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody: ErrorBody = error.error;
+        console.log(errorBody);
+      }
+    });
+    this.router.navigate(['/'], {replaceUrl: true});
+  }
+
+  completeSubtask(subtaskId: number, details: { name: string; description: string; status: boolean }) {
+    this.httpClient.put<SubTask>(`http://localhost:8080/tasks/subtasks/${subtaskId}`, {
+      name: details.name,
+      description: details.description,
+      done: true
+    }).subscribe({
+      next: response => {
+        this.taskInEdit.set({
+          ...this.taskInEdit()!,
+          subTasks: this.taskInEdit()!.subTasks.map(subtask => subtask.id === response.id ? response : subtask)
+        });
+
+        this.tasks.set(this.tasks().map(task =>
+          task.id === this.taskInEdit()!.id
+            ? {
+              ...task,
+              subTasks: task.subTasks.map(subtask =>
+                subtask.id === response.id ? response : subtask
+              )
+            }
+            : task
+        ));
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody: ErrorBody = error.error;
+        console.log(errorBody);
+      }
+    });
+    this.router.navigate(['/'], {replaceUrl: true});
+  }
+
+  deleteSubtask(id: number) {
+    this.httpClient.delete(`http://localhost:8080/tasks/subtasks/${id}`).subscribe({
+      next: () => {
+        this.taskInEdit.set({
+          ...this.taskInEdit()!,
+          subTasks: this.taskInEdit()!.subTasks.filter(subtask => subtask.id !== id)
+        });
+
+        this.tasks.set(this.tasks().map(task =>
+          task.id === this.taskInEdit()!.id
+            ? {
+              ...task,
+              subTasks: task.subTasks.filter(subtask => subtask.id !== id)
+            }
+            : task
+        ));
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody: ErrorBody = error.error;
+        console.log(errorBody);
+      }
+    });
+    this.router.navigate(['/'], {replaceUrl: true});
+  }
 }
