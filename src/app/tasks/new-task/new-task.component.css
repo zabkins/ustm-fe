@@ -154,3 +154,9 @@ button#discardButton svg {
 .action-button:active {
   transform: scale(0.95);
 }
+
+.field-invalid {
+  border: 3px solid #5a0011;
+  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}

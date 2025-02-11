@@ -19,6 +19,7 @@
         type="text"
         name="nameInput"
         formControlName="name"
+        [ngClass]="{'field-invalid': isFieldInvalid('name')}"
       />
     </div>
     <div class="new-task-control-row-vertical">
@@ -29,6 +30,7 @@
         type="text"
         name="descriptionInput"
         formControlName="description"
+        [ngClass]="{'field-invalid': isFieldInvalid('description')}"
       ></textarea>
     </div>
     <div class="new-task-control-row-horizontal">
@@ -39,6 +41,7 @@
         type="datetime-local"
         name="startDateInput"
         formControlName="startDate"
+        [ngClass]="{'field-invalid': isFieldInvalid('startDate')}"
       />
     </div>
     <div class="new-task-control-row-horizontal">
@@ -49,8 +52,18 @@
         type="datetime-local"
         name="finishDateInput"
         formControlName="finishDate"
+        [ngClass]="{'field-invalid': isFieldInvalid('finishDate')}"
       />
     </div>
+    @if (formInvalid) {
+      <div class="new-task-control-row-vertical">
+        @for (errorMsg of formErrors(); track formErrors().indexOf(errorMsg)) {
+          <div class="control-error">
+            <p>{{errorMsg}}</p>
+          </div>
+        }
+      </div>
+    }
   </form>
 </div>
 

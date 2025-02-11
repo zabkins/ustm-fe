@@ -24,7 +24,7 @@ export class DatesService {
     startDate: string;
     endDate: string;
   } {
-    let now = DateTime.now();
+    let now = DateTime.now().plus({minutes: 5});
     let anHourFromNow = now.plus({hours: 1});
     return {
       startDate: now.toFormat('yyyy-MM-dd\'T\'HH:mm'),
