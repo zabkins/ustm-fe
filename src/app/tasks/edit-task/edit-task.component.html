@@ -20,6 +20,7 @@
         type="text"
         name="nameInput"
         formControlName="name"
+        [ngClass]="{'field-invalid': isFieldInvalid('name')}"
       />
     </div>
     <div class="edit-task-control-row-vertical">
@@ -30,6 +31,7 @@
         type="text"
         name="descriptionInput"
         formControlName="description"
+        [ngClass]="{'field-invalid': isFieldInvalid('description')}"
       ></textarea>
     </div>
     <div class="edit-task-control-row-horizontal">
@@ -40,6 +42,7 @@
         type="datetime-local"
         name="startDateInput"
         formControlName="startDate"
+        [ngClass]="{'field-invalid': isFieldInvalid('startDate')}"
       />
     </div>
     <div class="edit-task-control-row-horizontal">
@@ -50,11 +53,18 @@
         type="datetime-local"
         name="finishDateInput"
         formControlName="finishDate"
+        [ngClass]="{'field-invalid': isFieldInvalid('finishDate')}"
       />
     </div>
     <div class="edit-task-control-row-horizontal">
       <div class="edit-task-control-label">Status</div>
-      <select class="edit-task-control-input" id="statusInput" name="statusInput" formControlName="status">
+      <select
+        class="edit-task-control-input"
+        id="statusInput"
+        name="statusInput"
+        formControlName="status"
+        [ngClass]="{'field-invalid': isFieldInvalid('status')}"
+      >
         <option value="IN_PROGRESS">IN PROGRESS</option>
         <option value="DONE">DONE</option>
         <option value="CANCELLED">CANCELLED</option>
@@ -68,6 +78,15 @@
         </svg>
       </button>
     </div>
+    @if (formInvalid) {
+      <div class="edit-task-control-row-vertical">
+        @for (errorMsg of formErrors(); track formErrors().indexOf(errorMsg)) {
+          <div class="control-error">
+            <p>{{errorMsg}}</p>
+          </div>
+        }
+      </div>
+    }
   </form>
   @if (task.subTasks.length >= 1 || subTaskBeingAdded) {
     <div class="edit-task-control-subtasks">
