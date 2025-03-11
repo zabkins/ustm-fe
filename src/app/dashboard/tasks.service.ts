@@ -91,6 +91,19 @@ export class TasksService {
     })
   }
 
+  deleteTask(id: number) {
+    this.httpClient.delete(`http://localhost:8080/tasks/${id}`).subscribe({
+      next: response => {
+        this.tasks.set(this.tasks().filter(task => task.id !== id));
+        this.discardTaskForm();
+      },
+      error: (error: HttpErrorResponse) => {
+        let errorBody: ErrorBody = error.error;
+        console.log(errorBody);
+      }
+    });
+  }
+
   addSubtask(taskId: number) {
     this.httpClient.post<SubTask>(`http://localhost:8080/tasks/${taskId}/subtasks`, {
       name: "",

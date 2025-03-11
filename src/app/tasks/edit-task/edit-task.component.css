@@ -153,6 +153,14 @@ button#submitButton, button#discardButton {
   border: 0.15rem solid #d0d6d9;
 }
 
+button#deleteButton {
+  color: #d0d6d9;
+  background: #802020;
+  margin-right: 0.1rem;
+  margin-left: 0.1rem;
+  border: 0.15rem solid #d0d6d9;
+}
+
 button#discardButton svg {
   height: 0.95rem;
   width: 0.95rem;

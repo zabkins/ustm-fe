@@ -79,4 +79,8 @@ export class EditTaskComponent implements OnInit {
     this.subTaskBeingAdded = true;
     this.tasksService.addSubtask(this.task.id);
   }
+
+  onDelete() {
+    this.tasksService.deleteTask(this.task.id);
+  }
 }
