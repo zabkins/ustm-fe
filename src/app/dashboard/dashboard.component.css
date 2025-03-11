@@ -165,6 +165,12 @@
   overflow: hidden;
 }
 
+.tasks-actions-area {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 .dashboard-add-task-button {
   justify-content: center;
   align-items: center;
