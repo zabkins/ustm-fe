@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {NewTask, Page, SubTask, Task} from "../tasks/tasks.models";
 import {ErrorBody} from "../auth/login/auth.models";
 import {Router} from "@angular/router";
+import {DatesService} from "../tasks/dates.service";
 
 @Injectable({providedIn: 'root'})
 export class TasksService {
@@ -10,6 +11,7 @@ export class TasksService {
   taskInEdit = signal<Task | null>(null);
   taskInAddition = signal<boolean>(false);
   @Output() taskFormDiscarded = new EventEmitter();
+  datesService = inject(DatesService);
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
@@ -114,12 +116,26 @@ export class TasksService {
           ...this.taskInEdit()!,
           subTasks: [response, ...this.taskInEdit()!.subTasks]
         });
+
+        this.tasks.set(this.tasks().map(task =>
+          task.id === this.taskInEdit()!.id
+            ? {
+              ...task,
+              subTasks: task.subTasks.map(subtask =>
+                subtask.id === response.id ? response : subtask
+              )
+            }
+            : task
+        ));
       },
       error: (error: HttpErrorResponse) => {
         let errorBody: ErrorBody = error.error;
         console.log(errorBody);
       }
     });
+    // TODO -> refactor
+    this.updateTaskAfterSubtaskChange();
+
     this.router.navigate(['/'], {replaceUrl: true});
   }
 
@@ -151,6 +167,9 @@ export class TasksService {
         console.log(errorBody);
       }
     });
+    // TODO -> refactor
+    this.updateTaskAfterSubtaskChange();
+
     this.router.navigate(['/'], {replaceUrl: true});
   }
 
@@ -182,6 +201,9 @@ export class TasksService {
         console.log(errorBody);
       }
     });
+    // TODO -> refactor
+    this.updateTaskAfterSubtaskChange();
+
     this.router.navigate(['/'], {replaceUrl: true});
   }
 
@@ -207,6 +229,22 @@ export class TasksService {
         console.log(errorBody);
       }
     });
+    // TODO -> refactor
+    this.updateTaskAfterSubtaskChange();
+
     this.router.navigate(['/'], {replaceUrl: true});
+  }
+
+  // TODO -> refactor
+  private updateTaskAfterSubtaskChange() {
+    let startDate = this.datesService.formatToDatetimeLocal(this.taskInEdit()!.startDate);
+    let finishDate = this.datesService.formatToDatetimeLocal(this.taskInEdit()!.finishDate);
+    this.updateTask(this.taskInEdit()!.id, {
+      name: this.taskInEdit()!.name,
+      description: this.taskInEdit()!.description,
+      startDate: this.datesService.getApiFormattedDate(startDate),
+      finishDate: this.datesService.getApiFormattedDate(finishDate),
+      status: this.taskInEdit()!.status,
+    })
   }
 }
